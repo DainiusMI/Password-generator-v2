@@ -1,1 +1,67 @@
-/*# sourceMappingURL=main.css.map */
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: none;
+  background-color: #100F15;
+  color: #CCCBD2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-container {
+  width: 25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+.app-container .title {
+  margin: 0;
+  padding: 1rem;
+  text-align: center;
+}
+.app-container .generators-screen {
+  background-color: #24232B;
+  width: 100%;
+}
+.app-container .settings-container {
+  background-color: #24232B;
+  width: 100%;
+}
+
+.length-container {
+  margin: 1rem;
+  line-height: 2rem;
+}
+.length-container .length-slider {
+  width: 100%;
+}
+
+.settings-list {
+  margin: 1rem;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.settings-list-item {
+  list-style-type: none;
+}
+
+.pwd-level-row {
+  background-color: #18171F;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.darker {
+  color: #898587;
+}/*# sourceMappingURL=main.css.map */

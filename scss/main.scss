@@ -1,2 +1,76 @@
 
 @use "variables.scss" as var;
+
+@mixin flex($direction, $aligh, $justify) {
+    display: flex;
+    flex-direction: $direction;
+    align-items: $aligh;
+    justify-content: $justify;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: none;
+
+    background-color: map-get(var.$project-color, foreground);
+    color: map-get(var.$project-color, text-lighter);
+
+    @include flex(column, center, center);
+}
+
+.app-container {
+    width: 25rem;
+
+    @include flex(column, center, center);
+    gap: 1rem;
+
+    .title {
+        margin: 0;
+        padding: 1rem;
+        text-align: center;
+    }
+    .generators-screen {
+        background-color: map-get(var.$project-color, primary);
+        width: 100%;
+    }
+    
+    .settings-container {
+        background-color: map-get(var.$project-color, primary);
+        width: 100%;
+
+    }
+
+}
+
+.length-container {
+    margin: 1rem;
+    line-height: 2rem;
+    .length-slider {
+        width: 100%;
+
+    }
+}
+
+.settings-list {
+    margin: 1rem;
+    padding: 0;
+    
+    @include flex(column, flex-start, center);
+    gap: .5rem;
+}
+
+.settings-list-item {
+    list-style-type: none;
+}
+
+.pwd-level-row {
+    background-color: map-get(var.$project-color, secondary);
+    @include flex(row, center, space-between);
+}
+
+.darker {
+    color: map-get(var.$project-color, text-darker);
+}
+
+
