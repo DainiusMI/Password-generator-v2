@@ -1,6 +1,7 @@
 
-@use "variables" as var;
-@use "slider";
+@use "./variables" as var;
+@use "./components/checkbox";
+@use "./components/slider";
 
 @mixin flex($direction, $aligh, $justify) {
     display: flex;
@@ -8,6 +9,8 @@
     align-items: $aligh;
     justify-content: $justify;
 }
+
+
 
 body {
     margin: 0;
@@ -80,30 +83,8 @@ body {
 
     @include flex(row, flex-start, center);
 
-    position: relative;
+    
 
-    input[type="checkbox"] {
-        
-        position: absolute;
-        opacity: 0;
-        cursor: pointer;
-
-        height: 0;
-        width: 0;
-        &::before {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: -5rem;
-            height: 1rem;
-            width: 1rem;
-            background-color: green;
-           
-        }
-        &:checked {
-           color: red;
-        }
-    }
 }
 
 .pwd-level-row {
