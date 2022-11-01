@@ -1,5 +1,6 @@
 
-@use "variables.scss" as var;
+@use "variables" as var;
+@use "slider";
 
 @mixin flex($direction, $aligh, $justify) {
     display: flex;
@@ -13,6 +14,7 @@ body {
     padding: 0;
     box-sizing: none;
 
+    font-family: sans-serif;
     background-color: map-get(var.$project-color, foreground);
     color: map-get(var.$project-color, text-lighter);
 
@@ -38,35 +40,86 @@ body {
     .settings-container {
         background-color: map-get(var.$project-color, primary);
         width: 100%;
+        padding: 1.5rem;
 
+        @include flex(column, flex-start, center);
+        gap: 1rem;
     }
 
 }
 
 .length-container {
-    margin: 1rem;
+    width: 100%;
     line-height: 2rem;
-    .length-slider {
+    
+    @include flex(column, center, flex-start);
+    .length-row {
         width: 100%;
-
+        @include flex(row, center, space-between);
+        p {
+            margin: 0;
+        }
+        #pwd-length {
+            color: map-get(var.$project-color, proj-green);
+            font-weight: 600;
+            font-size: 1.8rem;
+        }
     }
 }
 
 .settings-list {
-    margin: 1rem;
+    width: 100%;
     padding: 0;
-    
+    margin: 0;
     @include flex(column, flex-start, center);
     gap: .5rem;
 }
 
 .settings-list-item {
     list-style-type: none;
+
+    @include flex(row, flex-start, center);
+
+    position: relative;
+
+    input[type="checkbox"] {
+        
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+
+        height: 0;
+        width: 0;
+        &::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: -5rem;
+            height: 1rem;
+            width: 1rem;
+            background-color: green;
+           
+        }
+        &:checked {
+           color: red;
+        }
+    }
 }
 
 .pwd-level-row {
+    width: 100%;
+    padding: 1rem 0;
     background-color: map-get(var.$project-color, secondary);
     @include flex(row, center, space-between);
+
+    &:first-child {
+        margin: 0;
+        margin-left: 1rem;
+    }
+    &:last-child {
+        margin: 0;
+        margin-right: 1rem;
+    }
 }
 
 .darker {
@@ -74,3 +127,6 @@ body {
 }
 
 
+.slider {
+    width: 100%;
+}
