@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <link rel="stylesheet" href="./css/main.css">
     <title>Password generator</title>
 </head>
@@ -14,7 +16,7 @@
 
         <div class="generators-screen"> 
             <div class="result"></div>
-            <div class="clipboard"></div>
+            <i class="clipboard fa-regular fa-paste"></i>
         </div>
         <div class="settings-container">
 
@@ -40,7 +42,7 @@
                 </li>
                 <li class="settings-list-item">                    
                     <label for="lowercase-id">
-                        <input type="checkbox" value="lowercase-true" name="lowercase" id="lowercase-id">Include
+                        <input type="checkbox" value="lowercase-true" name="lowercase" id="lowercase-id">
                         Include Lowercase Letters
                     </label>
                 </li>
@@ -52,7 +54,7 @@
                 </li>
                 <li class="settings-list-item">
                     <label for="symbols-id">
-                        <input type="checkbox" value="symbols-true" name="symbols" id="symbols-id">Include Symbols
+                        <input type="checkbox" value="symbols-true" name="symbols" id="symbols-id">
                         Include Symbols
                     </label>
                 </li>
@@ -61,7 +63,7 @@
             <div class="pwd-level-row">
                 <p class="darker ">STRENGTH</p>
                 <div class="indicator-container">
-                    <p id="">NONE</p>
+                    <p id="level">NONE</p>
                     <div class="bars-container">
                         <div class="lvl-bar active-bar"></div>
                         <div class="lvl-bar"></div>
@@ -71,7 +73,10 @@
                 </div>
             </div>
 
-            <input type="submit" class="highlighted" value="Generate">
+            <div type="submit" class="button" id="generate">
+                <p>GENERATE</p>
+                <i class="fa-solid fa-arrow-right"></i>
+            </div> 
             
         </div>
 
