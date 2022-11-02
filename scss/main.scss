@@ -47,7 +47,7 @@ p {
         width: 100%;
 
         @include flex(row, center, space-between);
-        .clipboard {
+        #clipboard {
             cursor: pointer;
             &:hover {
                 color: map-get(var.$project-color, proj-green);

@@ -147,10 +147,10 @@ p {
   align-items: center;
   justify-content: space-between;
 }
-.app-container .generators-screen .clipboard {
+.app-container .generators-screen #clipboard {
   cursor: pointer;
 }
-.app-container .generators-screen .clipboard:hover {
+.app-container .generators-screen #clipboard:hover {
   color: #95FA99;
   font-weight: bold;
 }

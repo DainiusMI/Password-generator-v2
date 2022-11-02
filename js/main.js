@@ -17,6 +17,14 @@ const pwdStrength = document.getElementById("level");
 
 const generateButton = document.getElementById("generate");
 
+const clipboard = document.getElementById("clipboard");
+
+clipboard.addEventListener("click", () => {
+    if (displayScreen.innerText && displayScreen.innerText !== "none") {
+        navigator.clipboard.writeText(displayScreen.innerText);
+    }
+})
+
 
 // slider graphics update
 slider.addEventListener("input", () => {
@@ -28,7 +36,7 @@ slider.addEventListener("input", () => {
     slider.style.backgroundSize = (val - min) * 100 / (max - min) + "% 100%";
     displayLength.innerText = val;
     passwordLength = val;
-});
+})
 
 
 function generate() {
@@ -80,6 +88,22 @@ function checkLevel() {
     return level
 }
 
+function colorBars(level) {
+    const projectColors = ["", "#FCA18D", "#FAB647", "#E6E583", "#95FA99"];
+    color = projectColors[level];
+
+    levelBars.forEach(bar => {
+        if (level > 0) {
+            bar.style.backgroundColor = color;
+            bar.style.borderColor = color;
+            level -= 1;
+        }
+        else {
+            bar.style.backgroundColor = "#24232B";
+            bar.style.borderColor = "#CCCBD2";
+        }
+    })
+}
 
 
 generateButton.addEventListener("click", () => {
@@ -97,21 +121,4 @@ generateButton.addEventListener("click", () => {
     run = false;
 });
 
-function colorBars(level) {
-    const projectColors = ["", "#FCA18D", "#FAB647", "#E6E583", "#95FA99"];
-    color = projectColors[level];
 
-    levelBars.forEach(bar => {
-        if (level > 0) {
-            bar.style.backgroundColor = color;
-            bar.style.borderColor = color;
-            level -= 1;
-        }
-        else {
-            bar.style.backgroundColor = "#24232B";
-            bar.style.borderColor = "#CCCBD2";
-        }
-            
-        
-    })
-};
