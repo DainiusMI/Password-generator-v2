@@ -1,7 +1,7 @@
 
 const displayScreen = document.getElementById("screen");
 
-const slider = document.getElementById("slider-value");
+const slider = document.getElementById("slider");
 const displayLength = document.getElementById("pwd-length");
 let passwordLength = parseInt(displayLength.innerText);
 
