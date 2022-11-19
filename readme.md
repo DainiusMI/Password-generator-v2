@@ -1,5 +1,5 @@
 # PASSWORD GENERATOR V2
-This is a premium challenge from frontendmentors.io so no figma design or images used in it were accessible to me, so I did not bother to stay as close as possible design wise as I could had been.
+This is a "PREMIUM" challenge from [Frontend Mentor](https://www.frontendmentor.io).so style guides or images used in it were accessible for me.
 
 ### LINK TO THE CHALLENGE:
 https://www.frontendmentor.io/challenges/password-generator-app-Mr8CLycqjh
