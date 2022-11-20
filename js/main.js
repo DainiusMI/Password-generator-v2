@@ -29,17 +29,19 @@ class GeneratePassword {
             numbers: [...Array(10).keys()],
             letters: Array.from(Array(26)).map((e, i) => i +65).map((x) => String.fromCharCode(x).toLowerCase()),
             symbols: ["`", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "-", "+", "=", "{", "[", "}", "]", "|", "\", \":", ";", "<", ">", ".", "?", "/"]
-        }
+        };
+        this.characterPool = this.formCharPool();
+        this.createdPassword = '';
     }
     formCharPool() {
         let charPoolArr = [];
         if (this.uppercase) {
             this.characters.letters.map(letter => charPoolArr.push(letter.toUpperCase()));
         }
-        if (!this.lowercase) {
+        if (this.lowercase) {
             this.characters.letters.map(letter => charPoolArr.push(letter));
         }
-        if (!this.numbers) {
+        if (this.numbers) {
             this.characters.numbers.map(number => charPoolArr.push(number));
         }
         if (this.symbols) {
@@ -48,25 +50,83 @@ class GeneratePassword {
         return charPoolArr;
     }
     createPassword() {
-        let result = "";
-        for (let i = 0; i < passwordLength; i++) {
-            result += this.formCharPool()[Math.floor(Math.random() * this.formCharPool().length)];
+        if (this.characterPool.length > 0) {
+            for (let i = 0; i < passwordLength; i++) {
+                this.createdPassword += this.formCharPool()[Math.floor(Math.random() * this.formCharPool().length)];
+            }
         }
-        return result;
+
     }
 }
 
-const newPassword = new GeneratePassword();
-
-console.log(newPassword.createPassword())
-
-class EvaluetePassword extends GeneratePassword {
-    constructor(createPassword) {
-        super(createPassword())
+class RenderPassword extends GeneratePassword {
+    constructor(createdPassword) {
+        super(createdPassword);
+        this.level = 0;
+        this.levelDescription = ["AWFUL", "PITTY", "WEAK", "MEDIUM", "STRONG"];
+        this.levelColors = ["", "#FCA18D", "#FAB647", "#E6E583", "#95FA99"];
+        this.barColor = "";
+    }
+    testPassword() {
+        let level = 0;
+        if (passwordLength < 14) {
+            level -= 1;
+        }
+        if (/[A-Z]/.test(this.createdPassword)) {
+            level += 1;
+        }
+        if (/[a-z]/.test(this.createdPassword)) {
+            level += 1;
+        }
+        if (/\d/.test(this.createdPassword)) {
+            level += 1;
+        }
+        if (/\W/.test(this.createdPassword)) {
+            level += 1;
+        }
+        return level;
+    }
+    render() {
+        console.log(this.level)
+        pwdStrength.innerHTML = this.levelDescription[this.level];
+        levelBars.forEach(bar => {
+            if (this.level > 0) {
+                bar.style.backgroundColor = this.barColor;
+                bar.style.borderColor = this.barColor;
+                this.level -= 1;
+            }
+            else {
+                bar.style.backgroundColor = "#24232B";
+                bar.style.borderColor = "#CCCBD2";
+            }
+        })
+        displayScreen.innerText = this.createdPassword;
+    }
+    generate() {
+        this.createPassword();
+        this.level = this.testPassword();
+        this.barColor = this.levelColors[this.level];
+        this.render();
     }
 }
 
+generateButton.addEventListener("click", () => {
+    let run = false;
+    allInputs.forEach(checkbox => {
+        if (checkbox.checked) {
+           run = true;
+        }
+    })
+    if (run) {
+        const newPassword = new RenderPassword();
+        newPassword.generate();
+    }
+    run = false;
+});
 
+
+
+// copy to clipboard
 clipboard.addEventListener("click", () => {
     if (displayScreen.innerText && displayScreen.innerText !== "none") {
         navigator.clipboard.writeText(displayScreen.innerText);
@@ -155,18 +215,6 @@ function colorBars(level) {
 }
 
 
-generateButton.addEventListener("click", () => {
-    let run = false;
-    allInputs.forEach(checkbox => {
-        if (checkbox.checked) {
-           run = true;
-        }
-    })
-    if (run) {
-        displayScreen.innerText = generate();
-        colorBars(checkLevel());
-    }
-    run = false;
-});
+
 
 
