@@ -87,7 +87,6 @@ class RenderPassword extends GeneratePassword {
         return level;
     }
     render() {
-        console.log(this.level)
         pwdStrength.innerHTML = this.levelDescription[this.level];
         levelBars.forEach(bar => {
             if (this.level > 0) {
@@ -110,6 +109,7 @@ class RenderPassword extends GeneratePassword {
     }
 }
 
+
 generateButton.addEventListener("click", () => {
     let run = false;
     allInputs.forEach(checkbox => {
@@ -123,7 +123,6 @@ generateButton.addEventListener("click", () => {
     }
     run = false;
 });
-
 
 
 // copy to clipboard
@@ -146,7 +145,7 @@ slider.addEventListener("input", () => {
     passwordLength = val;
 })
 
-
+/*
 function generate() {
     const numbersArr = [...Array(10).keys()];
     const iterator = Array.from(Array(26)).map((e, i) => i +65);
@@ -213,8 +212,7 @@ function colorBars(level) {
         }
     })
 }
-
-
+*/
 
 
 
