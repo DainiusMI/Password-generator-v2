@@ -19,6 +19,54 @@ const generateButton = document.getElementById("generate");
 
 const clipboard = document.getElementById("clipboard");
 
+class GeneratePassword {
+    constructor() {
+        this.uppercase = uppercase.checked;
+        this.lowercase = lowercase.checked;
+        this.numbers = numbers.checked;
+        this.symbols = symbols.checked;
+        this.characters = {
+            numbers: [...Array(10).keys()],
+            letters: Array.from(Array(26)).map((e, i) => i +65).map((x) => String.fromCharCode(x).toLowerCase()),
+            symbols: ["`", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "-", "+", "=", "{", "[", "}", "]", "|", "\", \":", ";", "<", ">", ".", "?", "/"]
+        }
+    }
+    formCharPool() {
+        let charPoolArr = [];
+        if (this.uppercase) {
+            this.characters.letters.map(letter => charPoolArr.push(letter.toUpperCase()));
+        }
+        if (!this.lowercase) {
+            this.characters.letters.map(letter => charPoolArr.push(letter));
+        }
+        if (!this.numbers) {
+            this.characters.numbers.map(number => charPoolArr.push(number));
+        }
+        if (this.symbols) {
+            this.characters.symbols.map(symbol => charPoolArr.push(symbol));
+        }
+        return charPoolArr;
+    }
+    createPassword() {
+        let result = "";
+        for (let i = 0; i < passwordLength; i++) {
+            result += this.formCharPool()[Math.floor(Math.random() * this.formCharPool().length)];
+        }
+        return result;
+    }
+}
+
+const newPassword = new GeneratePassword();
+
+console.log(newPassword.createPassword())
+
+class EvaluetePassword extends GeneratePassword {
+    constructor(createPassword) {
+        super(createPassword())
+    }
+}
+
+
 clipboard.addEventListener("click", () => {
     if (displayScreen.innerText && displayScreen.innerText !== "none") {
         navigator.clipboard.writeText(displayScreen.innerText);
@@ -42,6 +90,7 @@ slider.addEventListener("input", () => {
 function generate() {
     const numbersArr = [...Array(10).keys()];
     const iterator = Array.from(Array(26)).map((e, i) => i +65);
+    console.log(iterator)
     const lettersArr = iterator.map((x) => String.fromCharCode(x).toLowerCase());
     const symbolsArr = ["`", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "-", "+", "=", "{", "[", "}", "]", "|", "\", \":", ";", "<", ">", ".", "?", "/"];
 
@@ -107,7 +156,6 @@ function colorBars(level) {
 
 
 generateButton.addEventListener("click", () => {
-
     let run = false;
     allInputs.forEach(checkbox => {
         if (checkbox.checked) {
